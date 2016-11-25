@@ -30,26 +30,13 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(BaseHandler):
     def get(self):
-        return self.render_template("hello.html")
+        return self.render_template("index.html")
 
-class RezultatHandler(BaseHandler):
-    def post(self):
-        besedilo = self.request.get("sporocilo")
-        ime = self.request.get("ime")
-
-        izzrebane = []
-
-        for j in range(7):
-            izzrebane.append(random.randint(1, 37))
-        stevilo = self.request.get("stevilka")
-
-        params = {"name": ime, "besedilo": besedilo, "izzrebane": izzrebane }
-
-        return self.render_template("rezultat.html", params=params)
-
-
+class OsnovniHandler(BaseHandler):
+    def get(self):
+        return self.render_template("base.html")
 
 app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler),
-    webapp2.Route('/rezultat', RezultatHandler)
+    webapp2.Route('/homepage', OsnovniHandler)
 ], debug=True)
